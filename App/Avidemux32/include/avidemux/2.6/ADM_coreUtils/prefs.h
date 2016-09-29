@@ -3,7 +3,7 @@
 
 #include "ADM_coreUtils6_export.h"
 #include "ADM_default.h"
-
+#include <vector>
 #define RC_OK     true
 #define RC_FAILED false
 #define NB_LAST_FILES 4
@@ -20,7 +20,7 @@ class ADM_COREUTILS6_EXPORT preferences {
 
 //		const char * get_str_min(options option);
 //		const char * get_str_max(options option);
-		void setFile(const char* file, char** const file1, int maxFiles);
+		void setFile(const std::string &file, std::string *file1, int maxFiles);
 
 	public:
 		preferences();
@@ -30,21 +30,22 @@ class ADM_COREUTILS6_EXPORT preferences {
 		bool get(options option, uint32_t *);
 		bool get(options option, int32_t  *);
 		bool get(options option, float *val);
-		bool get(options option, char **val);
+//		bool get(options option, char **val);
 		bool get(options option, bool *val);
+                bool get(options option, std::string &v);
 
 
 		bool set(options option, const uint32_t val);
 		bool set(options option, const int32_t  val);
 		bool set(options option, const float    val);
-		bool set(options option, const char    *val);
+//		bool set(options option, const char    *val);
 		bool set(options option, const bool     val);
-		
+		bool set(options option, const std::string &v);
 
 		bool  set_lastfile(const char* file);
 		bool  set_lastprojectfile(const char* file);
-		const char **get_lastfiles(void);
-		const char **get_lastprojectfiles(void);		
+		std::vector< std::string>get_lastfiles(void);
+		std::vector< std::string>get_lastprojectfiles(void);		
 };
 
 extern ADM_COREUTILS6_EXPORT preferences *prefs;
