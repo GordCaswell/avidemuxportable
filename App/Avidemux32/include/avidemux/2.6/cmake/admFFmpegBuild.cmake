@@ -9,7 +9,7 @@ ENDMACRO (xadd)
 
 option(FF_INHERIT_BUILD_ENV "" ON)
 
-set(FFMPEG_VERSION "3.0.2")
+set(FFMPEG_VERSION "3.0.3")
 set(FFMPEG_ROOT_DIR "${AVIDEMUX_TOP_SOURCE_DIR}/avidemux_core/ffmpeg_package")
 set(FFMPEG_PATCH_DIR  "${FFMPEG_ROOT_DIR}/patches/")
 set(FFMPEG_SOURCE_ARCHIVE "ffmpeg-${FFMPEG_VERSION}.tar.bz2")
@@ -23,7 +23,7 @@ set(FFMPEG_DECODERS  aac ac3 eac3 adpcm_ima_amv  amv  bmp  cinepak  cyuv  dca  d
                                          hevc  huffyuv  mjpeg
 					 mjpegb  mpeg2video  mpeg4  msmpeg4v2  msmpeg4v3  msvideo1  nellymoser  png  qdm2  rawvideo  snow
 					 svq3  theora  tscc  mp2 mp3 mp2_float mp3_float
-					 vc1  vp3  vp6  vp6a  vp6f  vp8 vp9 wmapro wmav2  wmv1  wmv2  wmv3 cscd lagarith flac)
+					 vc1  vp3  vp6  vp6a  vp6f  vp8 vp9 wmapro wmav2  wmv1  wmv2  wmv3 cscd lagarith flac vorbis)
 set(FFMPEG_ENCODERS  ac3  ac3_float dvvideo  ffv1  ffvhuff  flv  h263  huffyuv  mjpeg  mp2  mpeg1video  mpeg2video  mpeg4  snow aac dca flac)
 set(FFMPEG_MUXERS  flv  matroska  mpeg1vcd  mpeg2dvd  mpeg2svcd  mpegts  mov  mp4  psp webm)
 set(FFMPEG_PARSERS  ac3  h263  h264  hevc  mpeg4video)
@@ -47,6 +47,7 @@ IF(USE_NVENC)
    SET(FFMPEG_ENCODERS ${FFMPEG_ENCODERS} nvenc)
    xadd("--enable-nonfree")
    xadd("--enable-nvenc")
+   set(FFMPEG_ENCODERS  ${FFMPEG_ENCODERS} nvenc_h264 nvenc_hevc)
 ENDIF(USE_NVENC)
 
 if (NOT CROSS)
@@ -109,7 +110,7 @@ endif (USE_VDPAU)
 
 if (USE_LIBVA)
 	xadd(--enable-vaapi)
-	set(FFMPEG_DECODERS ${FFMPEG_DECODERS} h264_vaapi)
+	set(FFMPEG_DECODERS ${FFMPEG_DECODERS} h264_vaapi hevc_vaapi)
 endif (USE_LIBVA)
 
 
@@ -176,10 +177,10 @@ if (CROSS)
 		set(CROSS_OS darwin)
 		set(CROSS_ARCH i386)
 	else(APPLE)
-		xadd(--prefix /mingw)
+		xadd(--prefix ${CROSS})
 		xadd(--host-cc gcc)
 		xadd(--nm ${CMAKE_CROSS_PREFIX}-nm) 
-		#xadd(--sysroot /mingw/include)
+		xadd(--extra-cflags  -I${CROSS}/include)
 		if (CMAKE_C_FLAGS)
 			xadd(--extra-cflags ${CMAKE_C_FLAGS})
                         xadd(--extra-ldflags ${CMAKE_C_FLAGS})
@@ -243,6 +244,12 @@ if (FF_FLAGS)
 	set(FF_FLAGS "${FF_FLAGS}" CACHE STRING "")
 	xadd(${FF_FLAGS})
 endif (FF_FLAGS)
+IF(WIN32)
+        IF(USE_DXVA2)
+                xadd(--enable-dxva2)
+	        set(FFMPEG_DECODERS ${FFMPEG_DECODERS} h264_dxva2 hevc_dxva2)
+        ENDIF(USE_DXVA2)
+ENDIF(WIN32)
 
 if (NOT "${LAST_FFMPEG_FLAGS}" STREQUAL "${FFMPEG_FLAGS}")
 	set(FFMPEG_PERFORM_BUILD 1)
@@ -371,6 +378,11 @@ IF(USE_LIBVA)
         INSTALL(FILES "${FFMPEG_SOURCE_DIR}/libavcodec/vaapi.h" DESTINATION "${AVIDEMUX_INCLUDE_DIR}/avidemux/2.6/libavcodec" COMPONENT dev) 
         INSTALL(FILES "${FFMPEG_SOURCE_DIR}/libavcodec/vaapi_internal.h" DESTINATION "${AVIDEMUX_INCLUDE_DIR}/avidemux/2.6/libavcodec" COMPONENT dev) 
 ENDIF(USE_LIBVA)
+
+IF(USE_DXVA2)
+        INSTALL(FILES "${FFMPEG_SOURCE_DIR}/libavcodec/dxva2.h" DESTINATION "${AVIDEMUX_INCLUDE_DIR}/avidemux/2.6/libavcodec" COMPONENT dev) 
+        INSTALL(FILES "${FFMPEG_SOURCE_DIR}/libavcodec/dxva2_internal.h" DESTINATION "${AVIDEMUX_INCLUDE_DIR}/avidemux/2.6/libavcodec" COMPONENT dev) 
+ENDIF(USE_DXVA2)
 IF(USE_XVBA)
         INSTALL(FILES "${FFMPEG_SOURCE_DIR}/libavcodec/xvba.h" DESTINATION "${AVIDEMUX_INCLUDE_DIR}/avidemux/2.6/libavcodec" COMPONENT dev) 
         INSTALL(FILES "${FFMPEG_SOURCE_DIR}/libavcodec/xvba_internal.h" DESTINATION "${AVIDEMUX_INCLUDE_DIR}/avidemux/2.6/libavcodec" COMPONENT dev) 
@@ -389,6 +401,7 @@ INSTALL(FILES "${FFMPEG_SOURCE_DIR}/libavutil/attributes.h" "${FFMPEG_SOURCE_DIR
 	"${FFMPEG_SOURCE_DIR}/libavutil/cpu.h" "${FFMPEG_SOURCE_DIR}/libavutil/frame.h"
 	"${FFMPEG_SOURCE_DIR}/libavutil/log.h" "${FFMPEG_SOURCE_DIR}/libavutil/mathematics.h"
 	"${FFMPEG_SOURCE_DIR}/libavutil/mem.h" "${FFMPEG_SOURCE_DIR}/libavutil/pixfmt.h"
+	"${FFMPEG_SOURCE_DIR}/libavutil/pixdesc.h"
 	"${FFMPEG_SOURCE_DIR}/libavutil/channel_layout.h" 
 	"${FFMPEG_SOURCE_DIR}/libavutil/error.h" 
 	"${FFMPEG_SOURCE_DIR}/libavutil/dict.h" 

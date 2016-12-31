@@ -17,13 +17,15 @@
 /* #undef ADM_BSD_FAMILY */
 
 // use nvidia hw encoding 
-/* #undef USE_NVENC */
+#define USE_NVENC
 // use vdpau h264 hw decoding 
 /* #undef USE_VDPAU */
 // use xvba h264 hw decoding 
 /* #undef USE_XVBA */
 // use libva h264 hw decoding 
 /* #undef USE_LIBVA */
+// use dxva2 hw decoding 
+#define USE_DXVA2
 
 // 'gettimeofday' function is present
 #define HAVE_GETTIMEOFDAY
