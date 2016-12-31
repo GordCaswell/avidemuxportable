@@ -57,7 +57,7 @@ typedef void ADM_FAC_CALLBACK(void *cookie);
 #define ELEM_TYPE_FLOAT float
 
 /*********************************************/
-class diaElem
+class ADM_COREUI6_EXPORT diaElem
 {
   protected:
     void    setSize(int z) {size=z;};
@@ -319,14 +319,13 @@ public:
   int getRequiredLayout(void);
 };
 /*************************************************/
-typedef struct diaMenuEntry
+class diaMenuEntry
 {
-  public:
+public:
     uint32_t    val;
     const char *text;
     const char *desc;
-  public:
-}diaMenuEntry;
+};
 
 class ADM_COREUI6_EXPORT diaMenuEntryDynamic : public diaMenuEntry
 {
@@ -631,7 +630,7 @@ public:
   int getRequiredLayout(void);
 };
 /**********************************************/
-typedef diaElem *(CREATE_ASPECTRATIO_T)(uint32_t *value, const char *title, const char *tip );
+typedef diaElem *(CREATE_ASPECTRATIO_T)(uint32_t *num, uint32_t *den, const char *title, const char *tip );
 class ADM_COREUI6_EXPORT diaElemAspectRatio : public diaElem
 {
 public:
@@ -644,6 +643,7 @@ public:
 	void getMe(void);
 	void enable(uint32_t onoff);
 	int getRequiredLayout(void);
+        void finalize(void);
 };
 
 /*********************************************/
