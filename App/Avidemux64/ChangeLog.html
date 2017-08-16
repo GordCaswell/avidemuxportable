@@ -1,24 +1,73 @@
-<html><head><link rel=stylesheet type=text/css href=change.css></head>
-<body>Avidemux Changelog:<br>
-<table><tr><th>Message</th><th>Commit</th></tr>
-<tr><td> [Release] 2.6.18 </td><td><a href="https://github.com/mean00/avidemux2/commit/df32ee08b22c15aef7da527515d52e6ed6bbb811"> commit</td></tr>
-<tr><td> [Preview] Put back slider signal. Should be managed by flydialog itself </td><td><a href="https://github.com/mean00/avidemux2/commit/7ec2d0b3d5b11768bdf8448ec206c2d9509ccfd5"> commit</td></tr>
-<tr><td> [2.6.17] </td><td><a href="https://github.com/mean00/avidemux2/commit/fe069d3675daa22fe08d0958c25bcc1cdd757f6c"> commit</td></tr>
-<tr><td> [filters] Make the preview modal and clean it up, to avoid using stale handles later on </td><td><a href="https://github.com/mean00/avidemux2/commit/d49cac3871c2d1bbf52d0dc31a1a77800d0090b2"> commit</td></tr>
-<tr><td> Merge pull request #65 from eumagga0x2a/build-with-external-libs </td><td><a href="https://github.com/mean00/avidemux2/commit/0f86c7be73aa950f1ab066584db0e1eba5a1279e"> commit</td></tr>
-<tr><td> [build/plugins] Allow system libmp4v2 </td><td><a href="https://github.com/mean00/avidemux2/commit/aea8957dd42ec3ce83a921a2317e361c5a72b874"> commit</td></tr>
-<tr><td> Merge branch 'master' of github.com:mean00/avidemux2 </td><td><a href="https://github.com/mean00/avidemux2/commit/3088b365ab9d572009e90eec3e217e3783c5d0a2"> commit</td></tr>
-<tr><td> [MP4/muxer] Allow eac3 (fiftyplus) </td><td><a href="https://github.com/mean00/avidemux2/commit/fbb1eb67f11dd35decd75ee295feee22a8340a2c"> commit</td></tr>
-<tr><td> Merge pull request #64 from eumagga0x2a/filter-preview-slider </td><td><a href="https://github.com/mean00/avidemux2/commit/1edd4baed424db4d86d49eb7ba4db4f9be486cc2"> commit</td></tr>
-<tr><td> [flyDialog] Fix navigation slider (WIP), add missing tooltips </td><td><a href="https://github.com/mean00/avidemux2/commit/befdc396c667c730cf0e91f3ce261369aee60e80"> commit</td></tr>
-<tr><td> [build] not release </td><td><a href="https://github.com/mean00/avidemux2/commit/950a639aaa4676862b45541b87d8906f715d9b5b"> commit</td></tr>
-<tr><td> [flyDialog] Tweak a bit more autozoom </td><td><a href="https://github.com/mean00/avidemux2/commit/6803a6185e7f9abe529b6f7f05eae5b904c92407"> commit</td></tr>
-<tr><td> [flyDialog] Begin to simplify zoom computation </td><td><a href="https://github.com/mean00/avidemux2/commit/1fcc43c2defde1fad7bfbba41b40ec00d0a0e868"> commit</td></tr>
-<tr><td> [autoZoom] if unzooming make sure it is at least 1.5 </td><td><a href="https://github.com/mean00/avidemux2/commit/b77bac1b214215eb30d86d426018e95d7b0231ce"> commit</td></tr>
-<tr><td> [vaapi] Deeper probe </td><td><a href="https://github.com/mean00/avidemux2/commit/7efb0d103f3c5326f78b33300599a44d8ad4b518"> commit</td></tr>
-<tr><td> [vaapi] Deeper probe </td><td><a href="https://github.com/mean00/avidemux2/commit/2f257504ff12d5957c5836e424bd71e87ff6c0be"> commit</td></tr>
-<tr><td> [vaapi] check with have va_vpp.h </td><td><a href="https://github.com/mean00/avidemux2/commit/b6f651d9c57bfce0a1bb878a36127d75d4e04880"> commit</td></tr>
-<tr><td> [2.6.16] </td><td><a href="https://github.com/mean00/avidemux2/commit/655f5476a87fce29e98bceba5b24424ae22742e6"> commit</td></tr>
-<tr><td> [installer] update what s new </td><td><a href="https://github.com/mean00/avidemux2/commit/463c716842ff340970c59d07c6239aeadf6ad6fc"> commit</td></tr>
-<tr><td> [contrast] dont autoscale histogram </td><td><a href="https://github.com/mean00/avidemux2/commit/2ac3cfb6d19768ab6cf19bbb55336be6bd696114"> commit</td></tr>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+    <style type="text/css">
+        body {
+            margin: 0;
+            height: 100%;
+            font-family: Tahoma,Helvetica,Arial,sans-serif;
+            color: #333;
+        }
+
+        #inner {
+            margin: 0% 1% 0% 1%;
+        }
+
+        h1 {
+            padding: 0.5em;
+            font-family: Helvetica,Arial,sans-serif;
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #1B57B1;
+            vertical-align: middle;
+            margin: 1em;
+        }
+
+        ul li {
+            list-style: inside;
+            padding: 0.8em;
+            margin: 0.2em;
+            border: 1px solid #ddd;
+            border-radius: 0.2em;
+            font-size: 0.8em;
+        }
+
+        ul li:nth-child(odd) {
+            background-color: #fafafa;
+        }
+
+        ul li:nth-child(even) {
+            background-color: #f0f0f0;
+        }
+
+    </style>
+    <title>Avidemux Changelog</title>
+</head>
+<body>
+    <div id="inner">
+        <h1>Changes in Avidemux v2.6.19 – v2.6.20</h1>
+        <ul>
+            <li><strong>Core:</strong> The bundled FFmpeg has been updated to version 3.0.7</li>
+            <li><strong>Core Encoder:</strong> A crash encoding MPEG-2 with B-frames disabled has been fixed</li>
+            <li><strong>Core Encoder:</strong> An error due to invalid decoding timestamps at the end of encoding with MPEG-2 has been fixed</li>
+            <li><strong>Core Audio:</strong> Sound issues including audio dropouts with AAC in MPEG TS fixed</li>
+            <li><strong>Core Audio:</strong> External AAC audio misidentified as E-AC3 fixed</li>
+            <li><strong>MKV Demuxer:</strong> FPS calculation improved</li>
+            <li><strong>MKV Demuxer:</strong> A crash with audio tracks using lacing extensively fixed</li>
+            <li><strong>MKV Muxer:</strong> The FPS value is set correctly now</li>
+            <li><strong>FLV Demuxer:</strong> File kept open preventing deletion fixed</li>
+            <li><strong>VPX Decoder:</strong> Swapped colors fixed, support for VP9 added</li>
+            <li><strong>macOS:</strong> Passing command line arguments to the application fixed</li>
+            <li><strong>VDPAU:</strong> Decode MPEG-1 instead of crashing</li>
+            <li><strong>Qt / Properties Dialog:</strong> A button to copy the data to clipboard added</li>
+            <li><strong>Qt / Filter Manager:</strong> Dynamically disable not applicable context menu entries in the list of active filters</li>
+            <li><strong>Qt / Filter Manager:</strong> Horizontal scrolling in the list of available filters eliminated</li>
+            <li><strong>Qt / MPlayer eq2 Plugin:</strong> The sliders on the right becoming squeezed horizontally fixed</li>
+            <li><strong>UI:</strong> File dialog not adding a file name extension when saving projects fixed (not in 64 bit builds for Windows yet)</li>
+            <li><strong>i18n:</strong> Russian and German translations updated (TotalCaesar659 / eumagga0x2a)</li>
+            <li><strong>Debug:</strong> Avidemux now prints the correct version string to the console or to the application log</li>
+        </ul>
+    </div>
 </body>
+</html>
