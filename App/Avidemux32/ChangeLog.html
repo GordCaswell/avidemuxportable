@@ -1,24 +1,29 @@
-<html><head><link rel=stylesheet type=text/css href=change.css></head>
-<body>Avidemux Changelog:<br>
-<table><tr><th>Message</th><th>Commit</th></tr>
-<tr><td> [UI] Add file name extension to projects: exclude win64 for now </td><td><a href="https://github.com/mean00/avidemux2/commit/64d5904f20aa95f197a587e400291deef0a7b2cf"> commit</td></tr>
-<tr><td> [UI] Add file name extension to projects: convert std::string to const char* in the very last moment </td><td><a href="https://github.com/mean00/avidemux2/commit/25818d32bfd0c3c093f13f9fe0c24ab899ddea8c"> commit</td></tr>
-<tr><td> [installer] Update the release changelog </td><td><a href="https://github.com/mean00/avidemux2/commit/70a8cd67cbf5b635bedd15ca7c8f9506f298fa9e"> commit</td></tr>
-<tr><td> [UI] Add a file name extension when saving projects </td><td><a href="https://github.com/mean00/avidemux2/commit/766159caca579616213e8000ea7eb512e554cd31"> commit</td></tr>
-<tr><td> [audio] Check deeper if it is eac3, the 2 frames must be right after one another </td><td><a href="https://github.com/mean00/avidemux2/commit/328f3e6385c7fbae38fe1c59cdcb6a7480b05d02"> commit</td></tr>
-<tr><td> [installer] Provide a better description of the fixes for AAC in MPEG TS in the release changelog </td><td><a href="https://github.com/mean00/avidemux2/commit/51e222d1bb9b3f5a4a94c3af071c7e03f863f740"> commit</td></tr>
-<tr><td> [installer] Add a release changelog </td><td><a href="https://github.com/mean00/avidemux2/commit/581f48a3350194ee7f76220793efdf4fa273bf2c"> commit</td></tr>
-<tr><td> [partial] Fix start/end time in the description </td><td><a href="https://github.com/mean00/avidemux2/commit/8631702e81ef91e2afc6d84d2f6ced4982d8899c"> commit</td></tr>
-<tr><td> [build] bump version </td><td><a href="https://github.com/mean00/avidemux2/commit/59001f5ec44ec47dcc2c12c8ccfa2ef58a8de489"> commit</td></tr>
-<tr><td> [cross] Also look in lib64 for cmake mingw </td><td><a href="https://github.com/mean00/avidemux2/commit/df099dca58d9dbd6344f0eb4f8ee03655ddc1707"> commit</td></tr>
-<tr><td> [changelog] use another way to install the file </td><td><a href="https://github.com/mean00/avidemux2/commit/827b716763161258b3603860c838588ee03aef6a"> commit</td></tr>
-<tr><td> [winInstaller] Fix ChangeLog copy + dummy file </td><td><a href="https://github.com/mean00/avidemux2/commit/a6c3e2ffac605ce0f9464a65c7cddf8db99db787"> commit</td></tr>
-<tr><td> [winInstaller] Fix ChangeLog copy + dummy file </td><td><a href="https://github.com/mean00/avidemux2/commit/a045178fafa740bf7758943b72fd0e64f596f575"> commit</td></tr>
-<tr><td> [merge] Switch between self gen changelog and static file (ChangeLog.release) </td><td><a href="https://github.com/mean00/avidemux2/commit/94edd4a05e25cd40e4369210d71ab80a506ef062"> commit</td></tr>
-<tr><td> [qt5/cross] Use QT_HOME to find the cmake scripts </td><td><a href="https://github.com/mean00/avidemux2/commit/e4a8041148bc5397ca935ee9b9e8b3c8ee1f4f44"> commit</td></tr>
-<tr><td> [Qt/mainfilter] Make filter list items even higher to avoid clipped descriptions on Windows with certain DPI settings </td><td><a href="https://github.com/mean00/avidemux2/commit/ff90100e063613d2023766abcbb40b64fba8b9ba"> commit</td></tr>
-<tr><td> [i18n/de] Restore the translation of the 'Crop' filter, lost after renaming </td><td><a href="https://github.com/mean00/avidemux2/commit/9529fc46746e9a041d3197ee9a216df5b8dbc608"> commit</td></tr>
-<tr><td> [plugins/eq2] Fix dialog layout </td><td><a href="https://github.com/mean00/avidemux2/commit/dfb9cc876446278def8d188c424db4ab75579064"> commit</td></tr>
-<tr><td> [mkv/demux] increase max number of laces to 100, which is absurdely high </td><td><a href="https://github.com/mean00/avidemux2/commit/c80fa3e620c6c7b5a577216754dca2c3dc72f994"> commit</td></tr>
-<tr><td> [mkv/demux] Search for MKV_TRACKS harder </td><td><a href="https://github.com/mean00/avidemux2/commit/2756f9c9b0c992a7d287b3194c358fd30456863c"> commit</td></tr>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+    <link rel="stylesheet" type="text/css" href="change.css">
+    <title>Avidemux Changelog</title>
+</head>
+<body>
+    <div id="inner">
+        <h1>Changes in Avidemux v2.6.20/21 – v2.7.0</h1>
+        <ul>
+            <li><strong>Core:</strong><br><tab>FFmpeg switched to the 3.3.x branch</tab></li>
+            <li><strong>Editing:</strong><br><tab>Fixed frame computation bug that led to bad cutting (euma)</tab></li>
+            <li><strong>i18n:</strong><br><tab>Korean translation (sheppaul)</tab></li>
+            <li><strong>win32:</strong><br><tab>Put log files into the local folder (achim71)</tab></li>
+            <li><strong>Jobs:</strong><br><tab>Fix name of the executable search</tab></li>
+            <li><strong>UI:</strong><br><tab>Steplessly zoom paused video when the window is resized (euma)</tab></li>
+            <li><strong>UI:</strong><br><tab>Added Ctrl+Shift+C shortcut to copy the current PTS to clipboard (euma)</tab></li>
+            <li><strong>Filter:</strong><br><tab>eq2: UI improvements (euma)</tab></li>
+            <li><strong>Decoding:</strong><br><tab>Fix VP9 decoding</tab></li>
+            <li><strong>Filter:</strong><br><tab>Using rubber bands for crop too (me+euma)</tab></li>
+            <li><strong>Build:</strong><br><tab>Redone packaging on macOS</tab></li>
+            <li><strong>Decoding:</strong><br><tab>HEVC decoding via DXVA2 blacklisted on win32, active on win64</tab></li>
+            <li><strong>New Filter:</strong><br><tab>ADM ivtc</tab></li>
+            <li><strong>Audio:</strong><br><tab>Distinguish between AC3 and EAC3 when importing</tab></li>
+        </ul>
+    </div>
 </body>
+</html>
